@@ -1,4 +1,3 @@
 #EXTM3U
-# Redirect notice
-#EXTINF:-1 tvg-id="warning" group-title="Redirect",Please open in IPTV app
-https://yourdomain.com/redirect.html
+#EXTINF:-1 tvg-id="redirect" group-title="Notice",Open in IPTV App Only!
+https://rk-iptvm3y.vercel.app/index.html
