@@ -7,6 +7,7 @@
   <script>
     const ua = navigator.userAgent.toLowerCase();
 
+    // ONLY known IPTV/Media apps
     const isIPTVApp =
       ua.includes("vlc") ||
       ua.includes("mxplayer") ||
@@ -14,27 +15,21 @@
       ua.includes("ott") ||
       ua.includes("tivimate") ||
       ua.includes("iptv") ||
-      ua.includes("lavf") || // FFmpeg-based players
-      ua.includes("android") ||
-      ua.includes("smarttv") ||
-      ua.includes("tv") ||
-      ua.includes("firetv") ||
+      ua.includes("lavf") ||         // FFmpeg-based
       ua.includes("roku") ||
-      ua.includes("mag") ||
       ua.includes("enigma") ||
-      ua.includes("ios");
+      ua.includes("magbox");
 
+    // Now act based on real app
     if (isIPTVApp) {
-      // redirect to actual playlist
       window.location.href = "https://rk-iptvm3y.vercel.app/playlist.m3u8";
     } else {
-      // redirect to warning + Telegram
       window.location.href = "https://rk-iptvm3y.vercel.app/index.html";
     }
   </script>
 </head>
 <body style="background-color:#000; color:#fff; font-family:Arial; text-align:center; margin-top:20%;">
   <h1>🔄 Smart Redirecting...</h1>
-  <p>Please wait while we redirect you to the correct destination.</p>
+  <p>Hang tight... sending you to the right place.</p>
 </body>
 </html>
