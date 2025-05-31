@@ -5,31 +5,60 @@
   <title>Smart Redirecting...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
+    // Get user agent and convert to lowercase for easier matching
     const ua = navigator.userAgent.toLowerCase();
 
-    // ONLY known IPTV/Media apps
-    const isIPTVApp =
+    // Updated IPTV app user agent list, excluding ios, android, and tv
+    const isIPTVApp = 
+      ua.includes("ottnavigator") || // Explicitly include OTT Navigator
       ua.includes("vlc") ||
       ua.includes("mxplayer") ||
       ua.includes("gse") ||
       ua.includes("ott") ||
       ua.includes("tivimate") ||
       ua.includes("iptv") ||
-      ua.includes("lavf") ||         // FFmpeg-based
+      ua.includes("lavf") ||
+      ua.includes("smarttv") ||
+      ua.includes("firetv") ||
       ua.includes("roku") ||
-      ua.includes("enigma") ||
-      ua.includes("magbox");
+      ua.includes("mag") ||
+      ua.includes("enigma");
 
-    // Now act based on real app
+    // Debugging: Log user agent to console (if supported) for verification
+    console.log("User Agent: " + navigator.userAgent);
+
     if (isIPTVApp) {
-      window.location.href = "https://rk-iptvm3y.vercel.app/playlist.m3u8";
+      // Attempt to fetch and serve M3U8 content directly to avoid redirect issues
+      fetch('https://rk-iptvm3y.vercel.app/playlist.m3u8')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch playlist');
+          }
+          return response.text();
+        })
+        .then(data => {
+          // Serve M3U8 content directly
+          document.write(data);
+          document.close();
+        })
+        .catch(error => {
+          // Fallback to redirect if fetch fails
+          console.error("Fetch error: ", error);
+          window.location.href = "https://rk-iptvm3y.vercel.app/playlist.m3u8";
+        });
     } else {
+      // Redirect to index.html for non-IPTV apps
       window.location.href = "https://rk-iptvm3y.vercel.app/index.html";
     }
   </script>
 </head>
 <body style="background-color:#000; color:#fff; font-family:Arial; text-align:center; margin-top:20%;">
   <h1>🔄 Smart Redirecting...</h1>
-  <p>Hang tight... sending you to the right place.</p>
+  <p>Please wait while we redirect you to the correct destination.</p>
+  <p>User Agent: <span id="ua"></span></p>
+  <script>
+    // Display user agent on page for debugging
+    document.getElementById("ua").innerText = navigator.userAgent;
+  </script>
 </body>
 </html>
