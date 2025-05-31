@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Playlist URL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1c1b2a, #3a3a68);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+      max-width: 600px;
+      width: 90%;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #00ffc3;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 15px 0;
+      color: #ccc;
+    }
+
+    .playlist-url {
+      background: #2d2d4d;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 20px 0;
+      word-break: break-all;
+      font-weight: 600;
+      color: #00ffd5;
+      border: 1px dashed #00ffc3;
+    }
+
+    .copy-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: #00ffc3;
+      color: #000;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #00ddb5;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Here is Your Playlist URL</h1>
+    <p>Use this link only in IPTV-supported apps.</p>
+    <div class="playlist-url" id="playlistUrl">
+      https://example.com/your-playlist.m3u
+    </div>
+    <button class="copy-btn" onclick="copyPlaylist()">📋 Copy Playlist</button>
+  </div>
+
+  <script>
+    function copyPlaylist() {
+      const text = document.getElementById('playlistUrl').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Playlist URL copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
